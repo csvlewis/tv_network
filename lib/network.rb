@@ -11,13 +11,7 @@ class Network
   end
 
   def highest_paid_actor
-    all_salaries = []
     highest_paid_actor = nil
-    @shows.each do |show|
-      show.characters.each do |character|
-        all_salaries << character.salary
-      end
-    end
     @shows.each do |show|
       show.characters.each do |character|
         if character.salary == all_salaries.max
@@ -29,18 +23,26 @@ class Network
   end
 
   def payroll
+    Hash[all_actors.zip(all_salaries)]
+  end
+
+  def all_actors
     all_actors = []
-    all_salaries = []
     @shows.each do |show|
       show.characters.each do |character|
         all_actors << character.actor
       end
     end
+    all_actors
+  end
+
+  def all_salaries
+    all_salaries = []
     @shows.each do |show|
       show.characters.each do |character|
         all_salaries << character.salary
       end
     end
-    Hash[all_actors.zip(all_salaries)]
+    all_salaries
   end
 end
